@@ -26,8 +26,8 @@ jobs:
         run: |
           ssh -i key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
             cd ~/nodCICD-githubActions
-            docker build -t nodCICD-githubActions .
-            docker stop nodCICD-githubActions || true
-            docker rm nodCICD-githubActions || true
-            docker run -d -p 80:3000 --name nodCICD-githubActions nodCICD-githubActions
+            docker build -t nodeapp.
+            docker stop nodeapp || true
+            docker rm nodeapp || true
+            docker run -d -p 80:3000 --name nodeapp nodCICD-githubActions
           EOF
