@@ -29,5 +29,5 @@ jobs:
             docker build -t nodeapp.
             docker stop nodeapp || true
             docker rm nodeapp || true
-            docker run -d -p 80:3000 --name nodeapp nodCICD-githubActions
+            docker run -d -p 80:3000 --name nodeapp nodeapp
           EOF
