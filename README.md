@@ -66,7 +66,8 @@ bash
 http://<your-ec2-ip>
 
 You should see:
-Hello from Node.js container!
+<img width="937" alt="image" src="https://github.com/user-attachments/assets/05c2a4ce-a82d-4dca-a6a4-f207f5161dd6" />
+
 📦 Future Improvements
 Add HTTPS with Nginx + Let's Encrypt
 
