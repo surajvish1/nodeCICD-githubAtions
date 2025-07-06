@@ -1,0 +1,33 @@
+name: Deploy to EC2
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up SSH
+        run: |
+          echo "${{ secrets.EC2_KEY }}" > key.pem
+          chmod 600 key.pem
+
+      - name: Copy project to EC2
+        run: |
+          rsync -avz -e "ssh -i key.pem -o StrictHostKeyChecking=no" . ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }}:/home/${{ secrets.EC2_USER }}/nodCICD-githubActions
+
+      - name: Deploy and run Docker container
+        run: |
+          ssh -i key.pem -o StrictHostKeyChecking=no ${{ secrets.EC2_USER }}@${{ secrets.EC2_HOST }} << 'EOF'
+            cd ~/nodCICD-githubActions
+            docker build -t nodCICD-githubActions .
+            docker stop nodCICD-githubActions || true
+            docker rm nodCICD-githubActions || true
+            docker run -d -p 80:3000 --name nodCICD-githubActions nodCICD-githubActions
+          EOF
