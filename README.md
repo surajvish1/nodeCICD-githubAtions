@@ -22,7 +22,7 @@ simple-node-app/
 
 - Ubuntu 20.04 or 22.04
 - Docker installed:
-  ```bash
+  
   sudo apt update
   sudo apt install -y docker.io
   sudo usermod -aG docker ubuntu
@@ -33,9 +33,6 @@ Port 22 open (for SSH)
 Port 80 open (for HTTP)
 
 🚀 Running Locally with Docker
-bash
-Copy
-Edit
 docker build -t simple-node-app .
 docker run -p 3000:3000 simple-node-app
 Visit: http://localhost:3000
@@ -61,8 +58,6 @@ EC2_KEY	Content of your EC2 .pem SSH key
 
 🌐 Access the App
 After deployment, visit:
-
-bash
 http://<your-ec2-ip>
 
 You should see:
