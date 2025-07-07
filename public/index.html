@@ -11,13 +11,21 @@
       --bg: #f8f9fa;
       --text: #212529;
       --card-bg: #ffffff;
+      --input-bg: #fff;
+      --input-text: #212529;
+      --footer-text: #6c757d;
+      --border-color: #dee2e6;
       --btn-hover-scale: 1.05;
     }
 
     body.dark {
       --bg: #121212;
-      --text: #f0f0f0;
-      --card-bg: #1e1e1e;
+      --text: #e0e0e0;
+      --card-bg: #1f1f1f;
+      --input-bg: #2a2a2a;
+      --input-text: #e0e0e0;
+      --footer-text: #a0a0a0;
+      --border-color: #333;
     }
 
     body {
@@ -25,6 +33,11 @@
       color: var(--text);
       font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
       transition: background-color 0.3s, color 0.3s;
+    }
+
+    .container {
+      background-color: var(--bg);
+      transition: background-color 0.3s;
     }
 
     h1 {
@@ -40,27 +53,46 @@
       box-shadow: 0 4px 12px rgba(0,0,0,0.2);
     }
 
-    input:focus {
+    input.form-control {
+      background-color: var(--input-bg);
+      color: var(--input-text);
+      border: 1px solid var(--border-color);
+      transition: background-color 0.3s, color 0.3s, border-color 0.3s;
+    }
+
+    input.form-control::placeholder {
+      color: #888;
+    }
+
+    input.form-control:focus {
+      background-color: var(--input-bg);
+      color: var(--input-text);
       border-color: #0d6efd;
-      box-shadow: 0 0 5px rgba(13, 110, 253, 0.5);
-      transition: all 0.2s ease;
+      box-shadow: 0 0 5px rgba(13, 110, 253, 0.7);
     }
 
     .card {
       background-color: var(--card-bg);
+      border: 1px solid var(--border-color);
+      box-shadow: 0 0 15px rgba(0,0,0,0.07);
       opacity: 0;
       transform: translateY(20px);
       animation: fadeInCard 0.8s ease forwards;
       animation-delay: 0.5s;
+      transition: background-color 0.3s, border-color 0.3s, box-shadow 0.3s;
     }
 
     .card-header {
       background-color: #e9ecef;
       font-weight: bold;
+      border-bottom: 1px solid var(--border-color);
+      color: var(--text);
+      transition: background-color 0.3s, color 0.3s;
     }
 
     footer {
       font-size: 0.9rem;
+      color: var(--footer-text);
       transition: color 0.3s ease;
     }
 
@@ -77,6 +109,7 @@
       background: none;
       border: none;
       color: var(--text);
+      transition: color 0.3s;
     }
 
     /* Dark mode Bootstrap button overrides */
@@ -140,7 +173,7 @@
   </style>
 </head>
 
-<body class="bg-light text-dark">
+<body>
   <button class="dark-toggle" onclick="toggleDarkMode()">🌗 Toggle Dark Mode</button>
 
   <div class="container py-5">
@@ -162,7 +195,7 @@
     </div>
   </div>
 
-  <footer class="text-center mt-5 mb-3 text-muted">
+  <footer class="text-center mt-5 mb-3">
     &copy; Suraj Vishwakarma
   </footer>
 
@@ -199,10 +232,10 @@
       localStorage.setItem("darkMode", document.body.classList.contains("dark"));
     }
 
-    // Load dark mode preference on page load
     window.addEventListener("DOMContentLoaded", () => {
-      const dark = localStorage.getItem("darkMode") === "true";
-      if (dark) document.body.classList.add("dark");
+      if (localStorage.getItem("darkMode") === "true") {
+        document.body.classList.add("dark");
+      }
     });
   </script>
 </body>
